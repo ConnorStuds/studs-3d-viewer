@@ -37,7 +37,7 @@ controls.enableDamping = true;
 // Load model
 const loader = new GLTFLoader();
 loader.load(
-    "models/yourmodel.glb",
+    "models/MX5.glb",
     (gltf) => {
         const model = gltf.scene;
         scene.add(model);
@@ -62,3 +62,4 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
+
