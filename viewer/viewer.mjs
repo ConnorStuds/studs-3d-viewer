@@ -1,12 +1,21 @@
+// Load THREE core from CDN
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
-import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 
+// Load example modules with ?module patch to fix internal "three" imports
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js?module";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js?module";
+
+// Debug: confirm the file is actually running
+console.log("viewer.mjs loaded");
+
+// Canvas
 const canvas = document.getElementById("viewer");
 
+// Scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x111111);
 
+// Camera
 const camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
@@ -15,6 +24,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 1.5, 3);
 
+// Renderer
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true
@@ -39,6 +49,7 @@ const loader = new GLTFLoader();
 loader.load(
     "models/MX5.glb",
     (gltf) => {
+        console.log("Model loaded");
         const model = gltf.scene;
         scene.add(model);
     },
@@ -62,4 +73,3 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
-
