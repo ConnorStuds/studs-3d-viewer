@@ -1,3 +1,7 @@
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+
 const canvas = document.getElementById("viewer");
 
 const scene = new THREE.Scene();
@@ -27,16 +31,15 @@ dirLight.position.set(3, 5, 2);
 scene.add(dirLight);
 
 // Controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 // Load model
-const loader = new THREE.GLTFLoader();
+const loader = new GLTFLoader();
 loader.load(
     "models/yourmodel.glb",
     (gltf) => {
         const model = gltf.scene;
-        model.position.set(0, 0, 0);
         scene.add(model);
     },
     undefined,
